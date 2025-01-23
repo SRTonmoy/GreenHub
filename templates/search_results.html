@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Search Results for "{{ query }}"</h1>
+        <a href="/" class="logout-link">Back to Dashboard</a>
+    </header>
+
+    <div class="search-results-container">
+        {% if results %}
+            <h2>Results:</h2>
+            <ul>
+                {% for result in results %}
+                    <li>{{ result }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found for "{{ query }}".</p>
+        {% endif %}
+    </div>
+
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 GreenHub. All rights reserved.</p>
+    </footer>
+</body>
+</html>

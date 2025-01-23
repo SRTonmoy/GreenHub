@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | GreenHub</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Welcome to GreenHub Dashboard</h1>
+
+        <!-- Dark Mode Toggle Button -->
+        <button id="darkModeToggle">🌙 Dark Mode</button>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('fruits') }}">Fruits</a></li>
+                <li><a href="{{ url_for('vegetables') }}">Vegetables</a></li>
+                <li><a href="{{ url_for('nutrition') }}">Nutrition Info</a></li>
+                <li><a href="{{ url_for('pricing_trends') }}">Pricing Trends</a></li>
+            </ul>
+        </nav>
+
+        <!-- Search Bar -->
+        <form action="{{ url_for('search') }}" method="GET" class="search-form">
+            <input type="text" name="query" placeholder="Search fruits, vegetables, or trends..." required>
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+    <div class="dashboard-container">
+        <section id="fruits" class="dashboard-section">
+            <h3>Fruits</h3>
+            <p>Explore fresh fruits, their prices, and nutritional values.</p>
+            <a href="{{ url_for('fruits') }}"><img src="/static/images/fruits.jpg" alt="Fruits"></a>
+        </section>
+
+        <section id="vegetables" class="dashboard-section">
+            <h3>Vegetables</h3>
+            <p>Find the best pricing and health benefits of vegetables.</p>
+            <a href="{{ url_for('vegetables') }}"><img src="/static/images/vegetables.jpg" alt="Vegetables"></a>
+        </section>
+
+        <section id="nutrition" class="dashboard-section">
+            <h3>Nutrition Info</h3>
+            <p>Get insights into the nutritional values of various fruits and vegetables.</p>
+            <a href="{{ url_for('nutrition') }}"><img src="/static/images/nutrition.jpeg" alt="Nutrition Info"></a>
+        </section>
+
+        <section id="pricing-trends" class="dashboard-section">
+            <h3>Pricing Trends</h3>
+            <p>Visualize pricing trends across different regions and seasons.</p>
+            <a href="{{ url_for('pricing_trends') }}"><img src="/static/images/pricing-trends.jpeg" alt="Pricing Trends"></a>
+        </section>
+    </div>
+
+    <a href="/logout" class="logout-link">Logout</a>
+
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 GreenHub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        // Check for saved dark mode preference in localStorage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.textContent = '🌞 Light Mode';
+        }
+
+        // Toggle dark mode on button click
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            // Toggle button text and save preference
+            if (document.body.classList.contains('dark-mode')) {
+                darkModeToggle.textContent = '🌞 Light Mode';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeToggle.textContent = '🌙 Dark Mode';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
+</body>
+</html>
