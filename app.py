@@ -20,7 +20,7 @@ def login():
         if username == USER_DATA["username"] and password == USER_DATA["password"]:
             session["user"] = username  # Store the username in the session
             flash("Login successful!", "success")
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("index"))
         else:
             flash("Invalid username or password.", "error")
     
@@ -55,13 +55,13 @@ def search():
     return render_template("search_results.html", query=query, results=filtered_results)
 
 
-# Dashboard Route (Protected)
+# index Route (Protected)
 @app.route("/")
-def dashboard():
+def index():
     if "user" not in session:
-        flash("Please log in to access the dashboard.", "warning")
+        flash("Please log in to access the index.", "warning")
         return redirect(url_for("login"))
-    return render_template("dashboard.html")  # Main dashboard page
+    return render_template("index.html")  # Main index page
 
 # Fruits Route
 @app.route("/fruits")
